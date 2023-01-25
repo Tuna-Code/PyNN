@@ -1,5 +1,9 @@
 from Math.objs import Mat
-from Net.layer import Layer
-temp = Layer(3,"Sig")
+from Net.net import Net
 
-print(temp.input.mat[0][0])
+# 3 entries = 3 layers
+# Each entry is node count of the layer
+layers = [3,2,1]
+
+
+nn = Net(layers)
