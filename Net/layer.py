@@ -9,5 +9,3 @@ class Layer:
         self.actv_func = actv_func
 
 
-temp = Layer(3,"Tmp")
-print(temp.input)

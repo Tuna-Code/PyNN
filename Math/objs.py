@@ -41,7 +41,7 @@ class Mat:
                 else:
                     val = str(self.mat[i][j])
                 if(i >0 and j==0):
-                    if self.mat[i][j] > 0:
+                    if self.mat[i][j] >= 0:
                         text = text + " "
                         
                 if(j == self.cols-1):
