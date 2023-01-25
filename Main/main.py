@@ -1,6 +1,13 @@
 from Math.objs import *
 
 
+
+
+
+
+
+
+
 rows1 = 3
 cols1 = 2
 pre1 = ("rand",-2,4,3)
