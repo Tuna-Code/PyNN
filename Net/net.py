@@ -1,5 +1,6 @@
 from Net.layer import Layer
 from Math.objs import Mat
+
 class Net:
     def __init__(self, layer_format,actv_format):
         self.layer_format = layer_format
@@ -12,5 +13,6 @@ class Net:
             temp_layer = Layer(i,self.layer_format[i],self.actv_format[i])
             if(i > 0):
                 temp_layer.weights = Mat(self.layer_format[i-1], self.layer_format[i], ("zeroes",0,0,-1))
+                print(temp_layer.weights)
             self.layers.append(temp_layer)
-           
+            
