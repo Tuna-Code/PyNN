@@ -21,3 +21,7 @@ w2 = [[0.7,0.8],
       [0.9,0.1]]
 nn.set_weights(2,w2)
 
+print(nn.layers[1].weights)
+
+
+print(nn.layers[1].weights.mat[1])
