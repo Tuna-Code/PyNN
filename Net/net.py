@@ -13,6 +13,8 @@ class Net:
             temp_layer = Layer(i,self.layer_format[i],self.actv_format[i])
             if(i > 0):
                 temp_layer.weights = Mat(self.layer_format[i-1], self.layer_format[i], ("zeroes",0,0,-1))
+            else:
+                temp_layer.weights = Mat(1,1,("zeroes",0,0,-1))
             self.layers.append(temp_layer)
             
     def init(self, input, exp_out):
@@ -22,6 +24,16 @@ class Net:
             l0.output.mat[i][0] = input[i]
         #print(l0.output)
         
+
+
+
+
+
+
+
+
+
+
     def set_weights(self, l, weights):
         layer = self.layers[l]
         for i in range(0,layer.weights.rows):
