@@ -1,28 +1,7 @@
 from Math.objs import Mat
 from Net.net import Net
-import re
-#3 entries = 3 layers
- #Each entry is node count of the layer
-
-#layer_format = [3,2,2]
-#actv_format = ["None","Sigmoid","Sigmoid"]
 
 
-#nn.init(input, exp_out)
-
-
-#w1= [[0.1,0.3,0.5],
-#      [0.2,0.4,0.6]]
-
-#w1 = [[0.9,0.8,0.1],
-#      [0.3,0.5,0.6],
-#      [0.2,0.4,0.7]]
-
-
-
-#w2 = [[0.7,0.8],
-#      [0.9,0.1]]
-#w2 = [[0.3,0.5,0.9]]
 def createNetFromFile(path):
       file = open(path, "r")
       all_lines = file.readlines()
@@ -101,7 +80,7 @@ def createNetFromFile(path):
 
 
 
-nn = createNetFromFile("Data/simple.conf")
+nn = createNetFromFile("Data/simple/simple.conf")
 
 
 

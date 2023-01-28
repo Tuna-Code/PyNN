@@ -11,7 +11,12 @@ class Layer:
         self.weights = [[0]]
         self.num = num
         self.num_nodes = num_nodes
-        
+        #Derivative of Error with respect to the output
+        self.de_o = Mat(num_nodes, 1, prefill)
+        #Derivative of output with respect to the input
+        self.do_i = Mat(num_nodes, 1, prefill)
+        #Derivative of input with respect to the weights
+        self.di_w = None
         for i in range(0,num_nodes):
             
             self.bias.mat[i][0] = b

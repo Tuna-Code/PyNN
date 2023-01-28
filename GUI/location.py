@@ -30,3 +30,4 @@ while True:
     window['-OUT4-'].update((loc[0], loc[1] + window.size[1]))
 location=(220,420)
 window.close()
+
