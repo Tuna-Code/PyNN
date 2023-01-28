@@ -1,16 +1,16 @@
 from Net.layer import Layer
 from Math.objs import Mat
+import math
 
 class Net:
-    def __init__(self, layer_format,actv_format, bias):
+    def __init__(self, layer_format,actv_format,bias):
         self.layer_format = layer_format
         self.actv_format = actv_format
-        self.bias = bias
         self.layers = []
-        
+        self.bias = bias
         #Loop Through each Layer
         for i in range(0,len(layer_format)):
-            temp_layer = Layer(i,self.layer_format[i],self.actv_format[i])
+            temp_layer = Layer(i,self.layer_format[i],self.actv_format[i],self.bias[i])
             if(i > 0):
                 temp_layer.weights = Mat(self.layer_format[i], self.layer_format[i-1], ("zeroes",0,0,-1))
 
@@ -27,16 +27,43 @@ class Net:
         #print(l0.output)
        # self.layers[0] = l0
         
+    def activate_layer(self, layer):
+        
+        
+        for i in range(0,layer.num_nodes):
+            #print(layer.input.mat[i][0])
+            
+            #print(val)
+            if(layer.actv_func == "Sigmoid"):
+                layer.output.mat[i][0] = self.sigmoid(layer.input.mat[i][0])
+            elif(layer.actv_func == "None"):
+                 layer.output.mat[i][0] = layer.input.mat[i][0]
 
-    def forward_prop(self):
-        for i in range(1,len(self.layers)):
-            cur_layer = self.layers[i]
-            prev_layer = self.layers[i-1]
+    def sigmoid(self, x):
+        return 1/(1 + math.exp(-x))
+    
+    
+    def forward_prop(self, input, exp_out):
+        #
+        
+        for i in range(0,len(self.layers)):
+            if i == 0:
+                l0 = self.layers[0]
+        #print(l0)
+                for i in range(0,l0.output.rows):
+                    l0.input.mat[i][0] = input[i]
+                    l0.output = l0.input
+            else:
+                
+                cur_layer = self.layers[i]
+                prev_layer = self.layers[i-1]
 
-            prev_output = prev_layer.output
-            cur_weights = cur_layer.weights
+                prev_output = prev_layer.output
+                cur_weights = cur_layer.weights
 
-            cur_layer.input = (cur_weights*prev_output)
+                cur_layer.input = (cur_weights*prev_output) + cur_layer.bias
+                self.activate_layer(cur_layer)
+                
             #cur_layer.output = cur_layer.input
            # self.layers[i] = cur_layer
 

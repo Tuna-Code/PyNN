@@ -2,7 +2,7 @@ from Math.objs import Mat
 
 
 class Layer:
-    def __init__(self, num, num_nodes, actv_func):
+    def __init__(self, num, num_nodes, actv_func, b):
         prefill = ("zeroes",0,0,-1)
         self.input = Mat(num_nodes, 1, prefill)
         self.output = Mat(num_nodes, 1, prefill)
@@ -11,7 +11,12 @@ class Layer:
         self.weights = [[0]]
         self.num = num
         self.num_nodes = num_nodes
-
+        
+        for i in range(0,num_nodes):
+            
+            self.bias.mat[i][0] = b
+      
+      
 
     def __str__(self):
         text = "\n-------L" + str(self.num) + "-------\n"
