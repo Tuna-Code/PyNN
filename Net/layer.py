@@ -14,5 +14,11 @@ class Layer:
 
 
     def __str__(self):
-        text = "Layer #: " + str(self.num) + " Node Count: " + str(self.num_nodes) + " Actv Func: " + self.actv_func
+        text = "\n-------L" + str(self.num) + "-------\n"
+        text += "Node Count: " + str(self.num_nodes) + " Actv Func: " + self.actv_func
+        text += "\nInput:" + self.input.__str__()
+        text += "\nOutput:" + self.output.__str__()
+        if(self.num != 0):
+            text += "\nWeights:" + self.weights.__str__()
+        text += "----------------\n"
         return text
