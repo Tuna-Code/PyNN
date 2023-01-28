@@ -28,21 +28,41 @@ class Net:
        # self.layers[0] = l0
         
     def activate_layer(self, layer):
+        e_sum = 0
         
         
-        for i in range(0,layer.num_nodes):
             #print(layer.input.mat[i][0])
             
             #print(val)
-            if(layer.actv_func == "Sigmoid"):
+        if(layer.actv_func == "Sigmoid"):
+            for i in range(0,layer.num_nodes):
                 layer.output.mat[i][0] = self.sigmoid(layer.input.mat[i][0])
-            elif(layer.actv_func == "None"):
-                 layer.output.mat[i][0] = layer.input.mat[i][0]
+        elif(layer.actv_func == "Relu"):
+            for i in range(0,layer.num_nodes):
+                layer.output.mat[i][0] = self.relu(layer.input.mat[i][0])
+        
+        elif(layer.actv_func == "Softmax"):
+           
+            for i in range(0,layer.num_nodes):
+               
+                e_sum += math.exp(layer.input.mat[i][0])
+            for i in range(0,layer.num_nodes):
+                layer.output.mat[i][0] = math.exp(layer.input.mat[i][0]) / e_sum
+                
+        elif(layer.actv_func == "None"):
+            for i in range(0,layer.num_nodes):
+                layer.output.mat[i][0] = layer.input.mat[i][0]
 
+   
     def sigmoid(self, x):
         return 1/(1 + math.exp(-x))
     
-    
+    def relu(self, x):
+        return max(0.0, x)
+
+ 
+
+
     def forward_prop(self, input, exp_out):
         #
         
