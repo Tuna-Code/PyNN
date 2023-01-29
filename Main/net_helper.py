@@ -33,6 +33,7 @@ def createNetFromFile(path):
       all_lines = file.readlines()
       layers = []
       actv_func = []
+      error_func = ""
       bias = [0]
       weights_all = []
       for i in range (0,len(all_lines)):
@@ -48,6 +49,10 @@ def createNetFromFile(path):
             elif line.find("ActivationFunctions=") != -1:
                   l = line.partition('[')[2][:-2]
                   actv_func = l.split(',')
+                  
+            # Search file for error function statement
+            elif line.find("ErrorFunc=") != -1:
+                  error_func  = line[10:len(line)-1]
                   
              # Search file for bias config statement
             elif line.find("LayerBias=") != -1:
@@ -78,7 +83,7 @@ def createNetFromFile(path):
       
      # print(master_input)
       #print(master_output)
-      net = Net(layers,actv_func, bias,master_input, master_output)
+      net = Net(layers,actv_func,error_func, bias,master_input, master_output)
       for i in range(1,len(net.layers)):
             net.set_weights(i,weights_all[i-1])
             
