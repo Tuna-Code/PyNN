@@ -71,13 +71,13 @@ class Net:
         
     def calc_error(self):
         
-        print("\nFinal Output:" + self.output.__str__() + "\nExpected Output:" + self.exp_out.__str__())
+        
         
         
         if(self.error_func == "CrossEntropy"):
             n = len(self.output.mat)
-            sum = 0
-            print(self.exp_out.mat)
+            sum = 0  
+           
             for i in range(0,n):
                 
                 y = self.exp_out.mat[i][0]
@@ -92,8 +92,9 @@ class Net:
                 #s = y*math.log(o) + ((1-o)*math.log(1-o))
                 #print(s)
                 #sum = sum +  s
-            print(sum*-1)   
-            print(self.output_errors)
+            self.net_error = -1*sum
+            
+        print("\nFinal Output:" + self.output.__str__() + "\nExpected Output:" + self.exp_out.__str__() + "\nError Matrix:" + self.output_errors.__str__() + "\nNetwork Error:" + str(self.net_error) + "\n")
 
 
         
@@ -106,7 +107,7 @@ class Net:
 
 
     def __str__(self):
-        text = ""
+        text = "" 
         for i in range(0, len(self.layers)):
             text += self.layers[i].__str__()
         return text
