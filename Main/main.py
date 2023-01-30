@@ -9,22 +9,21 @@ os.system("clear")
 
 
 
-gui = GUI()
-gui.mainloop()
+#gui = GUI()
+#gui.mainloop()
 #net_file = gui.file_select()
 
-
-#nn = net_helper.createNetFromFile(net_file)
-
-
+net_file = "/home/tuna/coding/PyNN/Data/simple"
+nn = net_helper.createNetFromFile(net_file)
 
 
 
-#nn.forward_prop()
+
+
+nn.forward_prop()
 
 
 
-#nn.forward_prop(input, exp_out)
 
 
-#print(nn)
+print(nn)
