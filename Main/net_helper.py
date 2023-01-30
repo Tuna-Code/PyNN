@@ -3,8 +3,14 @@ from Net.net import Net
 import csv
 # Construct and return an neural network based on provided configuratio nfile
 def createNetFromFile(path):
-     
-      training_input =  ''.join(path.rpartition('/')[:2]) +"inputs.csv"
+      
+       
+      folder_name = path.split("/")
+      path = folder_name[-2] + "/" + folder_name[-1]
+      
+      training_input =  path + "/inputs.csv"
+      conf = path + "/" + folder_name[-1] + ".conf"
+      
       train_file  = open(training_input, "r")
       all_input = train_file.readlines()
       master_input = []
@@ -17,7 +23,7 @@ def createNetFromFile(path):
           master_input.append(temp_input)  
           
           
-      training_output =  ''.join(path.rpartition('/')[:2]) +"outputs.csv"
+      training_output =  path + "/outputs.csv"
       output_file  = open(training_output, "r")
       all_output = output_file.readlines()
       master_output = []
@@ -29,7 +35,7 @@ def createNetFromFile(path):
             temp_output.append(float(j))  
           master_output.append(temp_output)  
       
-      file = open(path, "r")
+      file = open(conf, "r")
       all_lines = file.readlines()
       layers = []
       actv_func = []
