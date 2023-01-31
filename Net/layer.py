@@ -53,7 +53,7 @@ class Layer:
       
 
     def __str__(self):
-        text = "\n-------L" + str(self.num) + "-------\n"
+        text = "-------L" + str(self.num) + "-------\n"
         text += "Node Count: " + str(self.num_nodes) + " Actv Func: " + self.actv_func
         text += "\nInput:" + self.input.__str__()
         text += "\nOutput:" + self.output.__str__()

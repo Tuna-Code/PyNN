@@ -33,7 +33,8 @@ class Mat:
             
                 
     def __str__(self):
-        text = "\nRows: "+ str(self.rows) +" Cols: "+ str(self.cols) +" Precision: "+ str(self.prefill[3])+"\n["
+        #text = "\nRows: "+ str(self.rows) +" Cols: "+ str(self.cols) +" Precision: "+ str(self.prefill[3])+"\n["
+        text = "\n["       
         for i in range(0,self.rows):
             for j in range(0,self.cols):
                 if(self.prefill[3] >= 0 and self.prefill[3] <=18):

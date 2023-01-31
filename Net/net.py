@@ -107,10 +107,10 @@ class Net:
 
 
     def __str__(self):
-        text = "" 
+        text = "Final Output:" + self.output.__str__() + "\nExpected Output:" + self.exp_out.__str__() + "\nError Matrix:" + self.output_errors.__str__() + "\nNetwork Error:" + str(self.net_error) + "\n\n"
+
         for i in range(0, len(self.layers)):
             text += self.layers[i].__str__()
-        text += "\nFinal Output:" + self.output.__str__() + "\nExpected Output:" + self.exp_out.__str__() + "\nError Matrix:" + self.output_errors.__str__() + "\nNetwork Error:" + str(self.net_error) + "\n"
         return text
         
         
