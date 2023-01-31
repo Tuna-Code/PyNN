@@ -3,6 +3,7 @@ import tkinter.messagebox
 import customtkinter
 import os
 from Net.net import Net
+import Main.net_helper
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -11,20 +12,18 @@ customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "gre
 class GUI(customtkinter.CTk):
     def __init__(self, nn):
         super().__init__()
-       
+        self.nn = nn
         # configure window
         self.title("CustomTkinter complex_example.py")
         self.geometry(f"{1100}x{580}")
-
+        self.data_dir = os.getcwd() + "/Data/"
         # configure grid layout (4x4)
         self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure((2, 3), weight=0)
         self.grid_rowconfigure((0, 1, 2), weight=1)
         
         files = os.listdir("Data")
-        print(files)
-        for file in files:
-            print(file)
+       
        
         
         # create sidebar frame with widgets
@@ -144,7 +143,6 @@ class GUI(customtkinter.CTk):
         self.seg_button_1.configure(values=["CTkSegmentedButton", "Value 2", "Value 3"])
         self.seg_button_1.set("Value 2")
 
-        print(self.combobox_1.get())
     def open_input_dialog_event(self):
         dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="CTkInputDialog")
         print("CTkInputDialog:", dialog.get_input())
@@ -158,5 +156,7 @@ class GUI(customtkinter.CTk):
         customtkinter.set_widget_scaling(new_scaling_float)
 
     def sidebar_button_event(self):
-        print(self.combobox_1.get())
-        print("sidebar_button click")
+        self.nn = Main.net_helper.createNetFromFile(self.data_dir + self.combobox_1.get())
+        print(self.nn)
+        print()
+        

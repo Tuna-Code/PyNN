@@ -13,6 +13,7 @@ os.system("clear")
 #net_file = gui.file_select()
 
 net_file = "/home/tuna/coding/PyNN/Data/simple"
+
 nn = net_helper.createNetFromFile(net_file)
 
 
