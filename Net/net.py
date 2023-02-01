@@ -132,7 +132,7 @@ class Net:
                 output_layer.di_w = prev_layer.output
                 output_layer.de_o.mat[i][0] = deriv
                 
-        print(output_layer.de_o*output_layer.do_i)
+        print(output_layer.de_o)
         print(output_layer.do_i)
         print(output_layer.di_w)
         
