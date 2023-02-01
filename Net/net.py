@@ -13,7 +13,8 @@ class Net:
         self.bias = bias
         self.training_inputs = training_inputs
         self.training_outputs = training_outputs
-        self.exp_out = Mat(3,1,("zeroes",0,0,-1))
+        self.exp_out = Mat(self.layer_format[0],1,("zeroes",0,0,-1))
+        
         self.output = []
         
         self.output_errors = Mat(self.layer_format[len(self.layer_format)-1], 1, ("zeroes",0,0,-1))
@@ -25,6 +26,7 @@ class Net:
             temp_layer = Layer(i,self.layer_format[i],self.actv_format[i],self.bias[i])
             if(i > 0):
                 temp_layer.weights = Mat(self.layer_format[i], self.layer_format[i-1], ("zeroes",0,0,-1))
+                temp_layer.weight_adjs = Mat(self.layer_format[i], self.layer_format[i-1], ("zeroes",0,0,-1))
 
             else:
                 temp_layer.weights = Mat(1,1,("zeroes",0,0,-1))
@@ -94,9 +96,67 @@ class Net:
                 #sum = sum +  s
             self.net_error = -1*sum
             
+        elif(self.error_func == "SqErr"):
+            sum = 0
+            for i in range(0,self.exp_out.rows):
+                output_layer = self.layers[len(self.layers)-1]
+                exp = self.exp_out.mat[i][0]
+                out = self.output.mat[i][0]
+                
+                error = ((exp - out)*(exp-out))/2
+                self.output_errors.mat[i][0] = error  
+                sum += error
+            self.net_error = sum
+            
         
 
+          
+    
 
+    
+    def back_prop(self):
+        output_layer = self.layers[len(self.layers)-1]
+        prev_layer = self.layers[len(self.layers)-2]
+        num_layers = len(self.layers) 
+        
+        #Calc deriv_err func wrt output first:
+        if(self.error_func == "SqErr"):
+            for i in range(0,output_layer.num_nodes):
+                exp = self.exp_out.mat[i][0]
+                out = self.output.mat[i][0]
+                
+                deriv = out - exp
+                if(output_layer.actv_func == "Sigmoid"):
+                    output_layer.do_i.mat[i][0] = out*(1-out)
+                    
+                output_layer.di_w = prev_layer.output
+                output_layer.de_o.mat[i][0] = deriv
+                
+        print(output_layer.de_o*output_layer.do_i)
+        print(output_layer.do_i)
+        print(output_layer.di_w)
+        
+       
+        for i in reversed(range(num_layers-1)):
+            if(i == 0):
+                break
+            else:
+                cur_layer = self.layers[i]
+                #print(cur_layer)
+        
+        
+        
+        for i in range(len(self.layers),0):
+            print(i)
+            
+            
+        if(self.error_func == "CrossEntropy"):
+            print("CE Backprop")
+        
+        
+        elif(self.error_func == "SqErr"):
+            #Calc partial deriv of sq error w.r.t. output
+            print()
         
     # If weights need to be manually set
     def set_weights(self, l, weights):

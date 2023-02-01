@@ -7,9 +7,9 @@ def createNetFromFile(path):
        
       folder_name = path.split("/")
       path = folder_name[-2] + "/" + folder_name[-1]
-      
+      print(path)
       training_input =  path + "/inputs.csv"
-      conf = path + "/" + folder_name[-1] + ".conf"
+      conf = path + "/" + "net.conf"
       
       train_file  = open(training_input, "r")
       all_input = train_file.readlines()
@@ -32,8 +32,11 @@ def createNetFromFile(path):
           cur_output = cur_line.split(',')
           temp_output= []
           for j in cur_output:
-            temp_output.append(float(j))  
+            
+            temp_output.append(float(j))
+            
           master_output.append(temp_output)  
+         
       
       file = open(conf, "r")
       all_lines = file.readlines()

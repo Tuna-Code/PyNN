@@ -10,6 +10,7 @@ class Layer:
         self.bias= Mat(num_nodes, 1, prefill)
         self.actv_func = actv_func
         self.weights = [[0]]
+        self.weight_adjs = [[0]]
         self.num = num
         self.num_nodes = num_nodes
         #Derivative of Error with respect to the output
@@ -27,6 +28,9 @@ class Layer:
     def relu(self, x):
         return max(0.0, x)
     
+        
+        
+        
     def activate_layer(self):
         e_sum = 0
             #print(layer.input.mat[i][0])
